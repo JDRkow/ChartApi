@@ -34,6 +34,8 @@ namespace ChartApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ChartApi", Version = "v1" });
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +47,14 @@ namespace ChartApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ChartApi v1"));
             }
+
+            app.UseCors(
+                builder => builder
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowed(host => true)
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin()
+            );
 
             app.UseRouting();
 
