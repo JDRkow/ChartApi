@@ -37,7 +37,7 @@ namespace ChartApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadTable(IFormFile uploadTable)
+        public IActionResult UploadTable([FromForm] IFormFile uploadTable)
         {
             using var uploadFileStream = uploadTable.OpenReadStream();
             var byteArrayFile = new byte[uploadTable.Length];
